@@ -36,6 +36,38 @@ brew uninstall --cask stavytskyi/tap/try-omarchy
 
 ## Maintenance
 
+GitHub Actions checks the latest stable upstream release every Monday at 07:23
+UTC. A newer release is committed directly to `main` only after all checks pass:
+
+- Stable version, expected asset URL, and SHA-256 release metadata.
+- Updater self-checks, Homebrew style and strict cask audit.
+- Actual DMG download and checksum verification by Homebrew.
+- Installation on a disposable Apple Silicon macOS 15 runner.
+- Application signature verification and Gatekeeper assessment.
+- Existing VM disk and boot-file test fixtures survive installation and uninstall.
+
+No pull-request review or personal token is required. The workflow uses the
+repository-scoped `GITHUB_TOKEN`. A failed check prevents publication; GitHub
+Actions failure notifications follow your account notification settings.
+
+The checks do not boot Linux or prove that guest package updates work. Real VM
+compatibility remains an upstream responsibility. Your Mac is not accessed:
+run `brew update` and `brew upgrade` to install the published version locally.
+
+Use **Actions → Update Try Omarchy → Run workflow** to run the checks manually,
+even when the version has not changed. This does not create a redundant commit.
+Standard GitHub-hosted runners are free for public repositories. No artifacts or
+caches are uploaded. GitHub may disable schedules after 60 days without
+repository activity; re-enable the workflow from Actions if necessary.
+
+Run the updater's local checks with:
+
+```sh
+python3 scripts/update-try-omarchy.py --self-test
+```
+
+For a manual update, or when release metadata lacks a SHA-256 digest:
+
 For each upstream release:
 
 1. Review the [release notes](https://github.com/omacom/try-omarchy/releases).
