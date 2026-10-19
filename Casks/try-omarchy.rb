@@ -1,6 +1,6 @@
 cask "try-omarchy" do
-  version "0.5.1"
-  sha256 "03760f542025600ef29f77319c93d7c3640a3b15fcf73bda75b9caa9fcbd9999"
+  version "1.1.0"
+  sha256 "85569dae25d22a2c070bceb5da48d53a5cf593f2e53f1c9d9f9dfeb117258e24"
 
   url "https://github.com/omacom/try-omarchy/releases/download/v#{version}/TryOmarchy.dmg"
   name "Try Omarchy"
